@@ -40,6 +40,12 @@ def get_comic_num(comic_num, red_button = True):
             else:
                 print "No red button for this comic"
 
+
+def get_latest_comic(red_button = True):
+    latest_comic_num = max(map(int, comic_dict.keys()))
+    get_comic_num(latest_comic_num, red_button = red_button)   
+
+
 def update_archive():
     page = requests.get(SMBC_ARCHIVE_URL)
     archive = bs4(page.content, "html.parser")
@@ -64,6 +70,8 @@ comic_ints = map(int, comic_dict.keys())
 
 comic_ints.sort()
 
-for i in comic_ints:
-    print "Getting comic {i}".format(i=i)
-    get_comic_num(i, red_button = False)
+#for i in comic_ints:
+#    print "Getting comic {i}".format(i=i)
+#    get_comic_num(i, red_button = False)
+
+get_latest_comic()
